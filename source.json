@@ -1,0 +1,10 @@
+{
+  "scrapers": [
+    {
+      "name": "DuckDuckGo",
+      "urlPattern": "duckduckgo.com/",
+      "searchUrl": "https://duckduckgo.com/?q={term}"
+    }
+  ],
+  "file": "duckduckgo.js"
+}
