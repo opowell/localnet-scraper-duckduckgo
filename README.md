@@ -8,3 +8,9 @@ Localnet pulls it from here the first time it scrapes such a page, through the
 - `duckduckgo.js`: the parser. It is injected into the scraped page after Localnet's DOM helpers (content-scripts/utils/dom.js) and defines `window.__dynamicParser`.
 - `duckduckgo.test.ts`: its unit tests, run from a Localnet checkout (`pnpm parsers pull`, then `pnpm test parsers/localnet-scraper-duckduckgo`).
 - `saved-pages/` (not in git): real pages saved from the site, which Localnet's `e2e/saved-pages.test.ts` scrapes. See Localnet's README.
+
+## What it reads
+
+**DuckDuckGo** (`duckduckgo.com/`): `duckduckgo.com/?q=…`, whose results its scripts draw (`article[data-testid="result"]`, waited for up to 6 s, its link `a[data-testid="result-title-a"]`, ads in a `[data-layout="ad"]`), and its versions without scripts, `html.duckduckgo.com/html/` (`.result a.result__a`, ads `.result--ad`) and `lite.duckduckgo.com/lite/` (`a.result-link`, ads in `tr.result-sponsored`), whose links go through `/l/?uddg=<url>`. Its bot check, picking out ducks (`[data-testid^="anomaly-modal"]`, or `#challenge-form` without scripts), is `blocked`.
+
+It reads a page of a search's results as a listing of what it found, as Localnet's search engine scrapers do (`searchResultsOf` in Localnet's `content-scripts/utils/dom.js`).
